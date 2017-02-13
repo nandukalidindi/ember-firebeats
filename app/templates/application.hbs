@@ -1,169 +1,156 @@
-{{!--<h1>PeopleTracker</h1>
-{{importantProperty}}
-
-<ul>
-  {{#each model as |scientist|}}
-    <li> {{scientist}} </li>
-  {{/each}}
-</ul>
-
-{{modelComputed}}
---}}
-
 <div class="row main-container-flex" style="width:100%; margin-right:0px; margin-left:0px">
-
-        <div class="sidebar" style="background:#fff">
-          <div class="logo-placeholder">
-            <img src="icons/firebeats.png" width="64" height="65.6" style="left: 18px;top: 18px;position: absolute;"/>
-            <span class="fire-beats-title" style="left: 102px;top: 32px;position: absolute;" >FireBeats</span>
-          </div>
-          <div class="left-panel-content-holder">
-            <div style="padding: 5px;">
-              <input type="text" class="search-bar search-bar-font" id="search-bar" placeholder="Search by name">
-            </div>
-
-             <div class="btn-group" style="width: 100%; padding: 10px;" role="group" aria-label="...">
-               <button id="red-heart" type="button" class="btn btn-default" style="width: 33.3%; height: 60px; background: white;" autofocus="true">
-                 <img src="icons/red-heart.png" width="32" height="32" style="margin-bottom:5px"/> <span class="button-count-text"> 0 </span>
-               </button>
-               <button id="yellow-heart" type="button" class="btn btn-default" style="width: 33.3%; height: 60px; background: white;">
-                <img src="icons/yellow-heart.png" width="32" height="32" style="margin-bottom:5px"/><span class="button-count-text"> 0 </span>
-               </button>
-               <button id="green-heart" type="button" class="btn btn-default" style="width: 33.3%; height: 60px; background: white;">
-                <img src="icons/green-heart.png" width="32" height="32" style="margin-bottom:5px"/> <span class="button-count-text"> 0 </span>
-               </button>
-             </div>
-
-             <div class="sorting-placeholder">
-               <button type="button" style="width: 50%; height:45px;" id="select-all" class="btn btn-default">
-                 Select all
-               </button>
-
-                <button type="button" style="border: none; background: white;" class="btn btn-default" id="sort-alphabet">
-                  <img src="icons/sort-alphabet-ascending.png">
-                </button>
-
-                <button type="button" style="border: none; background: white;" class="btn btn-default" id="sort-numeric">
-                  <img src="icons/sort-numeric-ascending.png">
-                </button>
-             </div>
-
-             <div id="left-panel" style="overflow-y:scroll;height:auto;">
-
-             </div>
-          </div>
-        </div>
-        <div style="min-width:950px;">
-          <div class="top-navigation">
-            <div class="clickable-controls">
-              <a href="#">
-                <img src="icons/overview-icon.png">
-              </a>
-
-              <a href="#">
-                <img src="icons/customize-icon.png">
-              </a>
-
-              <a href="#">
-                <img src="icons/report-icon.png">
-              </a>
-
-              <a href="#">
-                <img src="icons/settings-icon.png">
-              </a>
-
-              <a href="#">
-                <img src="icons/profile-icon.png">
-              </a>
-
-              <div style="float:right; right:20px;">
-                <div>
-                  <span class="welcome-user">Welcome, Michael</span><span class="log-out">Logout</span>
-                  <img src="icons/user-icon.png" width=80 height=80 >
-                  <div class="notification-holder">
-                    <a href="#">
-                      <img src="icons/notification-bell.png">
-                    </a>
-                    <a href="#">
-                      <img src="icons/message-icon.png">
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          <div style="background: #e6eaef; padding: 15px;left: auto; ">
-            <div class="well" style="background:white;">
-
-              <div class="main-chart-menu">
-                <div>
-                  <img src="icons/heart-top.png" width="32.9" height="29.8"/>
-                </div>
-                <div style="text-align:center; height:50px;">
-                  <span class="main-chart-heading">
-                    Average BPM
-                  </span>
-                  <span class="" id="average-range" style="font-size: 15px; font-weight: normal;">
-                  </span>
-                </div>
-
-                <div>
-                  <img src="icons/greater-than.png" width="20px" height="20px" class="greater-icon">
-                  <input type="number" id="heart-rate-input" style="text-align:center;" class="main-chart-spinners spinner-text" value="0" max="200">
-                </div>
-
-                <div>
-                  <span class="main-chart-heading">
-                    Duration
-                  </span>
-                </div>
-
-                <div>
-                  <img src="icons/less-than.png" width="20px" height="20px" class="greater-icon">
-                  <input type="number" id="duration-input" style="text-align:center" class="main-chart-spinners spinner-text" value="5">
-                </div>
-
-                <div>
-                  <input type="button" id="show-all" class="show-all" value="Show All">
-                </div>
-
-                <div>
-                  <a id="show-serious-5">
-                    <span class="show-count-selection">
-                      Serious 5
-                    </span>
-                  </a>
-                </div>
-
-                <div>
-                  <a id="show-serious-10">
-                    <span class="show-count-selection">
-                      Serious 10
-                    </span>
-                  </a>
-                </div>
-
-                <div>
-                  <a id="show-selected">
-                    <span class="show-count-selection">
-                      Show Selected
-                    </span>
-                  </a>
-                </div>
-              </div>
-
-              <div id="main-chart">
-
-              </div>
-
-              <div id="list-item-group">
-              </div>
-
-              <!-- <script src="js/main-chart-options.js"> </script>
-              <script src="js/data.js"> </script>
-              <script src="js/plot-chart.js"> </script> -->
-            </div>
-          </div>
-        </div>
+  <div class="sidebar" style="background:#fff">
+    <div class="logo-placeholder">
+      <img src="icons/firebeats.png" width="64" height="65.6" style="left: 18px;top: 18px;position: absolute;"/>
+      <span class="fire-beats-title" style="left: 102px;top: 32px;position: absolute;" >FireBeats</span>
+    </div>
+    <div class="left-panel-content-holder">
+      <div style="padding: 5px;">
+        <input type="text" class="search-bar search-bar-font" id="search-bar" placeholder="Search by name">
       </div>
+
+       <div class="btn-group" style="width: 100%; padding: 10px;" role="group" aria-label="...">
+         <button id="red-heart" type="button" class="btn btn-default" style="width: 33.3%; height: 60px; background: white;" autofocus="true">
+           <img src="icons/red-heart.png" width="32" height="32" style="margin-bottom:5px"/> <span class="button-count-text"> 0 </span>
+         </button>
+         <button id="yellow-heart" type="button" class="btn btn-default" style="width: 33.3%; height: 60px; background: white;">
+          <img src="icons/yellow-heart.png" width="32" height="32" style="margin-bottom:5px"/><span class="button-count-text"> 0 </span>
+         </button>
+         <button id="green-heart" type="button" class="btn btn-default" style="width: 33.3%; height: 60px; background: white;">
+          <img src="icons/green-heart.png" width="32" height="32" style="margin-bottom:5px"/> <span class="button-count-text"> 0 </span>
+         </button>
+       </div>
+
+       <div class="sorting-placeholder">
+         <button type="button" style="width: 50%; height:45px;" id="select-all" class="btn btn-default">
+           Select all
+         </button>
+
+          <button type="button" style="border: none; background: white;" class="btn btn-default" id="sort-alphabet">
+            <img src="icons/sort-alphabet-ascending.png">
+          </button>
+
+          <button type="button" style="border: none; background: white;" class="btn btn-default" id="sort-numeric">
+            <img src="icons/sort-numeric-ascending.png">
+          </button>
+       </div>
+
+       <div id="left-panel" style="overflow-y:scroll;height:auto;">
+
+       </div>
+    </div>
+  </div>
+  <div style="min-width:950px;">
+    <div class="top-navigation">
+      <div class="clickable-controls">
+        <a href="#">
+          <img src="icons/overview-icon.png">
+        </a>
+
+        <a href="#">
+          <img src="icons/customize-icon.png">
+        </a>
+
+        <a href="#">
+          <img src="icons/report-icon.png">
+        </a>
+
+        <a href="#">
+          <img src="icons/settings-icon.png">
+        </a>
+
+        <a href="#">
+          <img src="icons/profile-icon.png">
+        </a>
+
+        <div style="float:right; right:20px;">
+          <div>
+            <span class="welcome-user">Welcome, Michael</span><span class="log-out">Logout</span>
+            <img src="icons/user-icon.png" width=80 height=80 >
+            <div class="notification-holder">
+              <a href="#">
+                <img src="icons/notification-bell.png">
+              </a>
+              <a href="#">
+                <img src="icons/message-icon.png">
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div style="background: #e6eaef; padding: 15px;left: auto; ">
+      <div class="well" style="background:white;">
+
+        <div class="main-chart-menu">
+          <div>
+            <img src="icons/heart-top.png" width="32.9" height="29.8"/>
+          </div>
+          <div style="text-align:center; height:50px;">
+            <span class="main-chart-heading">
+              Average BPM
+            </span>
+            <span class="" id="average-range" style="font-size: 15px; font-weight: normal;">
+            </span>
+          </div>
+
+          <div>
+            <img src="icons/greater-than.png" width="20px" height="20px" class="greater-icon">
+            <input type="number" id="heart-rate-input" style="text-align:center;" class="main-chart-spinners spinner-text" value="0" max="200">
+          </div>
+
+          <div>
+            <span class="main-chart-heading">
+              Duration
+            </span>
+          </div>
+
+          <div>
+            <img src="icons/less-than.png" width="20px" height="20px" class="greater-icon">
+            <input type="number" id="duration-input" style="text-align:center" class="main-chart-spinners spinner-text" value="5">
+          </div>
+
+          <div>
+            <input type="button" id="show-all" class="show-all" value="Show All">
+          </div>
+
+          <div>
+            <a id="show-serious-5">
+              <span class="show-count-selection">
+                Serious 5
+              </span>
+            </a>
+          </div>
+
+          <div>
+            <a id="show-serious-10">
+              <span class="show-count-selection">
+                Serious 10
+              </span>
+            </a>
+          </div>
+
+          <div>
+            <a id="show-selected">
+              <span class="show-count-selection">
+                Show Selected
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <div id="main-chart">
+          {{render-chart}}
+        </div>
+
+        <div id="list-item-group">
+        </div>
+
+        <!-- <script src="js/main-chart-options.js"> </script>
+        <script src="js/data.js"> </script>
+        <script src="js/plot-chart.js"> </script> -->
+      </div>
+    </div>
+  </div>
+</div>

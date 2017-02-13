@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'ember-quickstart',
+    modulePrefix: 'firebeats',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
