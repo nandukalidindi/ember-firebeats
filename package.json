@@ -1,7 +1,7 @@
 {
-  "name": "ember-quickstart",
+  "name": "firebeats",
   "version": "0.0.0",
-  "description": "Small description for ember-quickstart goes here",
+  "description": "Minimalist application to aid firefighting team with necessary alerts and information",
   "private": true,
   "directories": {
     "doc": "doc",
