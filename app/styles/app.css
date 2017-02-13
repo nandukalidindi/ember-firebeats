@@ -1,13 +1,5 @@
-body{
-  padding-top:0px;
-}
 .sidebar{
   top:0;
-}
-.bg-white{
-
-  background: #fff;
-
 }
 .list-item{
   font-size: 10px;
@@ -80,12 +72,6 @@ body{
 /*
  * Base structure
  */
-
-/* Move down content because we have a fixed navbar that is 50px tall */
-body {
-  padding-top: 50px;
-}
-
 
 /*
  * Global add-ons
