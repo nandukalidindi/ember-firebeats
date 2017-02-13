@@ -1,0 +1,456 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+}
+
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  /*position: absolute;*/
+  /*width: 27%;*/
+  max-width: 340px;
+  min-width: 340px;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  padding: 0px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: #f5f5f5;
+  border-right: 1px solid #eee;
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #428bca;
+}
+
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+.main-container-flex {
+  display: flex;
+  justify-content: space-between;
+  overflow-x: hidden;
+}
+
+.sub-chart-name {
+  width: 25%;
+  float: left;
+  font-family: LucidaGrande;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  margin-top: 10px;
+  color: #2f3841;
+}
+
+.sub-chart-avg {
+  float: left;
+  width: 30%
+	font-family: .SFNSDisplay;
+	font-size: 30px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: 0.5px;
+	text-align: center;
+	color: #2f3841;
+}
+
+.dim-font {
+  width: 15%;
+  float: left;
+	font-family: .SFNSText;
+	font-size: 12px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: 0.9px;
+  margin-top: 5px;
+	text-align: center;
+	color: #b5b5b5;
+}
+
+.button-count-text {
+  width: 11.8px;
+	height: 35.8px;
+	font-family: HelveticaNeue;
+	font-size: 30px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #2f3841;
+}
+
+.logo-placeholder {
+	height: 103px;
+  position: relative;
+  padding-top: 30px;
+  padding-left: 30px;
+	border-radius: 4px;
+	background-color: #ffffff;
+	box-shadow: 1px 1px 9px 0 rgba(0, 0, 0, 0.09);
+}
+
+.search-bar {
+  width: 100%;
+	height: 57px;
+	border-radius: 10px;
+	background-color: #ffffff;
+	box-shadow: inset 0 3px 4px 0 rgba(0, 0, 0, 0.13);
+}
+
+.left-panel-content-holder {
+  width: 100%;
+	border-radius: 4px;
+	background-color: #fefefe;
+	box-shadow: 1px 1px 9px 0 rgba(0, 0, 0, 0.09);
+}
+
+.fire-beats-title {
+  width: 165px;
+  height: 61px;
+  font-family: BanglaMN;
+  font-size: 33px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -2.9px;
+  text-align: left;
+  color: #47596f;
+}
+
+.sorting-placeholder {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 70%;
+  height: 45px;
+  padding-left: 10px;
+}
+
+.select-all-button {
+	height: 35px;
+	opacity: 0.12;
+	border-radius: 8px;
+	background-color: #47596f;
+}
+
+.select-all-text {
+	opacity: 0.6;
+	font-family: LucidaGrande;
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	color: #2f3841;
+}
+
+.sub-chart-container {
+  width: 78%;
+  float: left;
+	height: 125px;
+	border-radius: 4px;
+	background-color: #ffffff;
+	box-shadow: 1px 1px 9px 0 rgba(0, 0, 0, 0.09);
+}
+
+.sub-chart-container text {
+    font-size: 9px !important;
+}
+
+.profile-icon-left-panel {
+  width: 44px;
+	height: 44px;
+	opacity: 0.99;
+	border-radius: 5px;
+	box-shadow: 1px 1px 9px 0 rgba(0, 0, 0, 0.5);
+}
+
+.checkbox-left-panel {
+  zoom: 1.1;
+  background: white;
+  width: 28px;
+	height: 28px;
+	border-radius: 6px;
+	background-image: linear-gradient(to bottom, #f8f8f8, rgba(255, 255, 255, 0.76)), linear-gradient(#ffffff, #ffffff);
+	box-shadow: 0 -2px 5px 0 rgba(31, 32, 34, 0.34), 0 -1px 3px 0 rgba(0, 0, 0, 0.33);
+}
+
+.top-navigation {
+	height: 103px;
+	border-radius: 5px;
+	background: white;
+  /*width: 72%;*/
+}
+
+.clickable-controls {
+  /*width: 70%;*/
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.main-chart-menu {
+  /*background: black;*/
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.main-chart-heading {
+  width: 148.7px;
+	height: 27px;
+	/*font-family: AvenirNext;*/
+	font-size: 20px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #2f3841;
+}
+
+.main-chart-spinners {
+  width: 100.8px;
+	height: 43px;
+	border-radius: 10px;
+	background-color: #f9f9f9;
+	box-shadow: inset 0 1px 4px 0 rgba(0, 0, 0, 0.13);
+}
+
+.spinner-text {
+  text-align: center;
+  /*font-family: AvenirNext;*/
+	font-size: 18px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #5f5f59;
+}
+
+.show-all {
+  width: 100.8px;
+	height: 32px;
+	border-radius: 17px;
+	border: solid 1px #2f3841;
+  /*font-family: AvenirNext;*/
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: center;
+	background: white;
+}
+
+.show-all-text {
+  width: 75.9px;
+	height: 25px;
+}
+
+.show-count-selection {
+	/*font-family: AvenirNext;*/
+	font-size: 16px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #5f5f59;
+}
+
+.bottom-icon {
+  height: 102px;
+  opacity: 0.99;
+  border-radius: 5px;
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.bottom-details {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bottom-sub-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom-text-name {
+	font-family: LucidaGrande;
+	font-size: 16px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.38;
+	letter-spacing: normal;
+	text-align: left;
+	color: #2f3841;
+}
+
+.bottom-text {
+  font-family: LucidaGrande;
+	font-size: 14px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: 1.38;
+	letter-spacing: normal;
+	text-align: left;
+	color: #2f3841;
+}
+
+.notify-button {
+  width: 100px;
+	height: 35px;
+	border-radius: 6px;
+	background-image: linear-gradient(to bottom, #eb4646, #ce3131);
+	box-shadow: 0 1px 0 0 #920000;
+}
+
+.search-bar-font {
+  padding-left: 22.8px;
+	font-family: HelveticaNeue;
+	font-size: 21px;
+	font-weight: 500;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	text-align: left;
+	color: #b8b8b8;
+  margin-top:8px;
+}
+
+.notification-holder {
+  text-align: center;
+  margin-top: -40px;
+}
+
+.status-container {
+  width: 71px;
+	height: 28px;
+	border-radius: 4px;
+	background-color: #ffffff;
+	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.28);
+}
+
+.detail-separation {
+  float: left;
+  margin-right: 10px;
+}
+
+.highcharts-color-1 {
+  stroke: #2f3841;
+}
+
+#main-chart .highcharts-xaxis .highcharts-axis-line {
+	stroke-width: 2px;
+  stroke: #2f3841;
+}
+
+.greater-icon {
+  position: absolute;
+  margin-top: 12.0px;
+  margin-left: 5px;
+}
+
+/*#main-chart .highcharts-yaxis .highcharts-axis-line {
+  stroke: #eb4646
+}*/
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
