@@ -1,0 +1,33 @@
+<div class="" style="display:flex; justify-content:space-between; margin: 10px;">
+  <div style="width:15%"><img src="icons/user-icon.png" class="bottom-icon"></div>
+
+  <div class="bottom-details">
+    <div>
+      <div class="bottom-text-name detail-separation">{{series.name}}</div>
+      <div id=${item.name}online class="detail-separation" data-toggle="tooltip" data-placement="right" title="On duty">
+        <img src="icons/online-icon.png" width="8">
+      </div>
+    </div>
+    <div class="bottom-sub-details">
+      <div class="bottom-text" style="width: 10%;">
+        <div> {{series.gender}} </div>
+        <div>Age: {{series.age}}</div>
+      </div>
+      <div class="bottom-text" style="width: 32%;">
+        <div>Current: 100 bpm</div>
+        <div>Rest: 180 bpm</div>
+        <div>Average: 200 bpm (Last 5 hours) </div>
+      </div>
+      <div class="bottom-text" style="width: 28%;">
+        <div>Cell: {{series.cell}} </div>
+        <div>District: {{series.district}} </div>
+        <div>Current Location: {{series.current_location}} </div>
+      </div>
+      <div class="" style="width: 10%; margin-right: 10px">
+        <a id="notify-button">
+          <img src="icons/notify-button.png" class="notify-button">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

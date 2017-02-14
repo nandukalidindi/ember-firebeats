@@ -8,7 +8,9 @@ export default Ember.Component.extend({
 
   avgBPM: 180,
 
-  restBPM: 165,
+  restBPM: Ember.computed('avgBPM', 'chartData', function() {
+    return this.get('avgBPM') - 15;
+  }),
 
   chartOptions: {
         chart: {

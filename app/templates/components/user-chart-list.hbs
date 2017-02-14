@@ -1,3 +1,3 @@
 {{#each chartData as |userData|}}
-  {{user-chart checked=true name=userData.name avgBPM=180 restBPM=165 chartData=userData}}
+  {{user-chart checked=true name=userData.name avgBPM=userData.avgBPM chartData=userData}}
 {{/each}}
