@@ -1,6 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+
+  checked: true,
+
+  name: "Nandu",
+
+  avgBPM: 180,
+
+  restBPM: 165,
+
   chartOptions: {
         chart: {
             height: 100,
@@ -69,41 +78,12 @@ export default Ember.Component.extend({
         }
     },
 
-    chartData: [
-       {
-          type: 'area',
-          name: 'Nandu',
-          gender: 'Male',
-          age: 25,
-          cell: '(646) 100-929',
-          district: 'Bayridge',
-          current_location: 'Mercer St',
-          data: [
-            [1, 93],
-            [2, 155],
-            [3, 141],
-            [4, 133],
-            [5, 160],
-            [6, 114],
-            [7, 128],
-            [8, 94],
-            [9, 111],
-            [10, 160],
-            [11, 116],
-            [12, 73],
-            [13, 138],
-            [14, 110],
-            [15, 150],
-            [16, 89],
-            [17, 95],
-            [18, 84],
-            [19, 125],
-            [20, 74],
-            [21, 82],
-            [22, 145],
-            [23, 148],
-            [24, 158]
-          ]
-      }
-    ]
+  chartData: null,
+
+  didInsertElement() {
+    this._super(...arguments);
+    var chartData = this.get('chartData');
+    chartData.type = 'area';
+    this.set('chartData', [chartData]);
+  }
 });
