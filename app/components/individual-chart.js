@@ -1,14 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
-  series: {
-    name: "Nandu",
-    data: [[1, 2], [3, 4]]
-  }
-
-  chartOptions = {
+  chartOptions: {
         chart: {
+            height: 100,
             zoomType: 'x'
         },
         title: {
@@ -74,8 +69,9 @@ export default Ember.Component.extend({
         }
     },
 
-    chartData: [      
+    chartData: [
        {
+          type: 'area',
           name: 'Nandu',
           gender: 'Male',
           age: 25,
@@ -110,4 +106,4 @@ export default Ember.Component.extend({
           ]
       }
     ]
-})
+});
