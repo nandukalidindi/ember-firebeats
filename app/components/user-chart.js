@@ -14,6 +14,7 @@ export default Ember.Component.extend({
 
   chartOptions: {
         chart: {
+            type: 'area',
             height: 100,
             zoomType: 'x'
         },
@@ -82,10 +83,10 @@ export default Ember.Component.extend({
 
   chartData: null,
 
+  arrayifiedChartData: [],
+
   didInsertElement() {
     this._super(...arguments);
-    var chartData = this.get('chartData');
-    chartData.type = 'area';
-    this.set('chartData', [chartData]);
+    this.set('arrayifiedChartData', [this.get('chartData')]);
   }
 });

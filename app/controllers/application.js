@@ -1,8 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  importantProperty: "HELLO",
-
   chartData: [
     {
       name: 'Prabodh',
@@ -303,5 +301,22 @@ export default Ember.Controller.extend({
         [24, 122]
       ]
     }
-  ]
+  ],
+
+  init() {
+    this._super(...arguments);
+    (this.get('chartData') || []).forEach(function(series) {
+      series.avgBPM = this.calculateAverage(series.data);
+    }.bind(this));
+  },
+
+  calculateAverage(data) {
+    var sum = 0, count=1;
+    data.forEach(function(entry) {
+      sum += entry[1];
+      count += 1;
+    });
+    return Math.round(sum/count)
+  }
+
 });

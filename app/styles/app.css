@@ -149,6 +149,7 @@
   display: flex;
   justify-content: space-between;
   overflow-x: hidden;
+  flex-direction: row-reverse;
 }
 
 .sub-chart-name {
