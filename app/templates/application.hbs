@@ -100,7 +100,7 @@
         </div>
 
         <div id="main-chart">
-          {{main-chart content=chartData chartOptions=chartOptions}}
+          {{main-chart content=chartData chartOptions=chartOptions colorUpdate=colorUpdate}}
         </div>
 
         <div id="list-item-group">
@@ -150,7 +150,9 @@
 
        <div id="left-panel" style="overflow-y:scroll;height:auto;">
          <div>
-           {{user-chart-list chartData=chartData}}
+           {{#if colorUpdate}}
+              {{user-chart-list chartData=chartData}}
+           {{/if}}
          </div>
        </div>
     </div>

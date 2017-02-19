@@ -356,12 +356,19 @@ export default Ember.Controller.extend({
       }
   },
 
+  colorUpdate: false,
+
   init() {
     this._super(...arguments);
     (this.get('chartData') || []).forEach(function(series) {
       series.avgBPM = this.calculateAverage(series.data);
+      series.checked = true;
     }.bind(this));
   },
+
+  contentDidChange: Ember.observer('chartData.@each.color', function() {
+    debugger;
+  }),
 
   calculateAverage(data) {
     var sum = 0, count=1;
@@ -369,7 +376,7 @@ export default Ember.Controller.extend({
       sum += entry[1];
       count += 1;
     });
-    return Math.round(sum/count)
+    return Math.round(sum/count);
   }
 
 });

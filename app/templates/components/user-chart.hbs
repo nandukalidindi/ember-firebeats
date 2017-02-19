@@ -2,7 +2,7 @@
   <div style="float:left; width: 20%; height: 130px; display:flex; flex-direction: column; justify-content: space-between; align-items: center;">
    <img class="profile-icon-left-panel" src="icons/user-icon.png">
    <img class="" src="icons/online-icon.png" width=12>
-   <input class="checkbox-left-panel" type="checkbox" checked={{checked}}>
+   {{input type="checkbox" class="checkbox-left-panel" checked=chartData.checked}}
   </div>
   <div class="sub-chart-container">
     <div style="height: 40px; width: 100%; float:left; margin-left: 10px;">
@@ -13,7 +13,7 @@
       <div class="dim-font"> REST BPM </div>
      </div>
      <div style="height: 100px; float: left; width: 100%">
-       {{high-charts content=arrayifiedChartData chartOptions=chartOptions}}
+       {{user-highchart content=arrayifiedChartData chartOptions=chartOptions}}
    </div>
   </div>
 </div>
