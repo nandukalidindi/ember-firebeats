@@ -487,19 +487,36 @@ export default Ember.Controller.extend({
 
   sortNumeric: true,
 
+  searchText: "",
+
+  searchTextDidChange: Ember.observer('searchText', function() {
+    var searchText = this.get('searchText');
+    var filteredData = this.getFilteredDataOnBpmAndTime(this.get('typeMap')[this.get('activeToggle')]).filter(function(series) {
+      if(series.name.toLowerCase().indexOf(searchText.toLowerCase()) !== -1) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    this.set('freshChartData', filteredData);
+  }),
+
   actions: {
     redToggle() {
       this.set('activeToggle', 'red');
+      this.set('searchText', "");
       this.set('freshChartData', this.getFilteredDataOnBpmAndTime(this.get('typeMap')['red']));
     },
 
     yellowToggle() {
       this.set('activeToggle', 'yellow');
+      this.set('searchText', "");
       this.set('freshChartData', this.getFilteredDataOnBpmAndTime(this.get('typeMap')['yellow']));
     },
 
     greenToggle() {
       this.set('activeToggle', 'green');
+      this.set('searchText', "");
       this.set('freshChartData', this.getFilteredDataOnBpmAndTime(this.get('typeMap')['green']));
     },
 
@@ -509,10 +526,11 @@ export default Ember.Controller.extend({
     },
 
     showAll() {
+      this.set('selectedHeartRate', 100);
       this.get('freshChartData').forEach(function(series) {
         Ember.set(series, 'checked', true);
       });
-      var filteredData = this.getFilteredDataOnBpmAndTime(this.get('freshChartData'))
+      var filteredData = this.getFilteredDataOnBpmAndTime(this.get('freshChartData'));
       this.set('refreshDataUponSelection', filteredData);
     },
 
@@ -520,7 +538,7 @@ export default Ember.Controller.extend({
       this.get('freshChartData').forEach(function(series) {
         Ember.set(series, 'checked', true);
       });
-      var filteredData = this.getFilteredDataOnBpmAndTime(this.get('freshChartData'))
+      var filteredData = this.getFilteredDataOnBpmAndTime(this.get('freshChartData'));
 
       filteredData = filteredData.sort(function(a, b) {
         var averageA = a.avgBPM,
@@ -592,6 +610,18 @@ export default Ember.Controller.extend({
         return (x < y ? 1 : x > y ? -1 : 0);
       }).slice());
       this.toggleProperty('sortNumeric');
+    },
+
+    fitlerSearchedData() {
+      var searchText = this.get('searchText');
+      var filteredData = this.getFilteredDataOnBpmAndTime(this.get('typeMap')[this.get('activeToggle')]).filter(function(series) {
+        if(series.name.toLowerCase().indexOf(searchText.toLowerCase()) !== -1) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      this.set('freshChartData', filteredData);
     }
   },
 
