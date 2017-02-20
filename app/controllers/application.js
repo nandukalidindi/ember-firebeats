@@ -366,10 +366,6 @@ export default Ember.Controller.extend({
     }.bind(this));
   },
 
-  contentDidChange: Ember.observer('chartData.@each.color', function() {
-    debugger;
-  }),
-
   calculateAverage(data) {
     var sum = 0, count=1;
     data.forEach(function(entry) {
