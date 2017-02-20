@@ -547,42 +547,50 @@ export default Ember.Controller.extend({
     },
 
     sortAscendingAlphabet() {
-      this.get('freshChartData').sort(function(a,b) {
+      // This kind of ate so much time and thanks to this marcioj's answer in
+      // https://github.com/emberjs/ember.js/issues/10405 to use slice(), not
+      // sure how, but it worked!
+      this.set('freshChartData', this.get('freshChartData').sort(function(a,b) {
         var x = a.name.toLowerCase();
         var y = b.name.toLowerCase();
         return (x < y ? -1 : x > y ? 1 : 0);
-      });
-      this.notifyPropertyChange('freshChartData');
+      }).slice());
       this.toggleProperty('sortAlphabet');
     },
 
     sortDescendingAlphabet() {
-      this.get('freshChartData').sort(function(a,b) {
+      // This kind of ate so much time and thanks to this marcioj's answer in
+      // https://github.com/emberjs/ember.js/issues/10405 to use slice(), not
+      // sure how, but it worked!
+      this.set('freshChartData', this.get('freshChartData').sort(function(a,b) {
         var x = a.name.toLowerCase();
         var y = b.name.toLowerCase();
         return (x < y ? 1 : x > y ? -1 : 0);
-      });
-      this.notifyPropertyChange('freshChartData');
+      }).slice());
       this.toggleProperty('sortAlphabet');
     },
 
     sortAscendingNumeric() {
-      this.get('freshChartData').sort(function(a, b) {
+      // This kind of ate so much time and thanks to this marcioj's answer in
+      // https://github.com/emberjs/ember.js/issues/10405 to use slice(), not
+      // sure how, but it worked!
+      this.set('freshChartData', this.get('freshChartData').sort(function(a, b) {
         var x = a.avgBPM,
             y = b.avgBPM;
         return (x < y ? -1 : x > y ? 1 : 0);
-      });
-      this.notifyPropertyChange('freshChartData');
+      }).slice());
       this.toggleProperty('sortNumeric');
     },
 
     sortDescendingNumeric() {
-      this.get('freshChartData').sort(function(a, b) {
+      // This kind of ate so much time and thanks to this marcioj's answer in
+      // https://github.com/emberjs/ember.js/issues/10405 to use slice(), not
+      // sure how, but it worked!
+      this.set('freshChartData', this.get('freshChartData').sort(function(a, b) {
         var x = a.avgBPM,
             y = b.avgBPM;
         return (x < y ? 1 : x > y ? -1 : 0);
-      });
-      this.notifyPropertyChange('freshChartData');
+      }).slice());
       this.toggleProperty('sortNumeric');
     }
   },
