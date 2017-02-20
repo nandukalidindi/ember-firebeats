@@ -374,6 +374,18 @@ export default Ember.Controller.extend({
     }
   }),
 
+  redCount: Ember.computed('typeMap', function() {
+    return this.get('typeMap')['red'].length;
+  }),
+
+  yellowCount: Ember.computed('typeMap', function() {
+    return this.get('typeMap')['yellow'].length;
+  }),
+
+  greenCount: Ember.computed('typeMap', function() {
+    return this.get('typeMap')['green'].length;
+  }),
+
   init() {
     this._super(...arguments);
     (this.get('chartData') || []).forEach(function(series) {
