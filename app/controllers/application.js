@@ -427,16 +427,34 @@ export default Ember.Controller.extend({
     return Math.round(sum/count);
   },
 
+  currentRange: Ember.computed('activeToggle', function() {
+    var color = this.get('activeToggle');
+    switch (color) {
+      case 'red':
+        return "( " + this.get('redRange')[0] + " - " + this.get('redRange')[1] + " )";
+        break;
+      case 'yellow':
+        return "( " + this.get('yellowRange')[0] + " - " + this.get('yellowRange')[1] + " )";
+        break;
+      case 'green':
+        return "( " + this.get('greenRange')[0] + " - " + this.get('greenRange')[1] + " )";
+        break;
+    }
+  }),
+
   actions: {
     redToggle() {
+      this.set('activeToggle', 'red');
       this.set('freshChartData', this.get('typeMap')['red']);
     },
 
     yellowToggle() {
+      this.set('activeToggle', 'yellow');
       this.set('freshChartData', this.get('typeMap')['yellow']);
     },
 
     greenToggle() {
+      this.set('activeToggle', 'green');
       this.set('freshChartData', this.get('typeMap')['green']);
     }
   }
