@@ -370,7 +370,7 @@ export default Ember.Controller.extend({
 
   colorUpdateFetched: Ember.observer('colorUpdate', function() {
     if(this.get('colorUpdate')) {
-      this.set('freshChartData', this.get('typeMap')['red']);
+      this.set('freshChartData', this.getFilteredDataOnBpmAndTime(this.get('typeMap')['red']));
     }
   }),
 
@@ -432,31 +432,100 @@ export default Ember.Controller.extend({
     switch (color) {
       case 'red':
         return "( " + this.get('redRange')[0] + " - " + this.get('redRange')[1] + " )";
-        break;
       case 'yellow':
         return "( " + this.get('yellowRange')[0] + " - " + this.get('yellowRange')[1] + " )";
-        break;
       case 'green':
         return "( " + this.get('greenRange')[0] + " - " + this.get('greenRange')[1] + " )";
-        break;
     }
   }),
+
+  selectedHeartRate: Ember.computed('activeToggle', function() {
+    return 100;
+  }),
+
+  selectedTimeRange: 5,
+
+  getFilteredDataOnBpmAndTime(initialData) {
+    var currentTime = 11;
+    var average = this.get('selectedHeartRate') || 0,
+        from = this.get('selectedTimeRange') || 5,
+        to = 24;
+
+    if(currentTime < from) {
+      from = 1;
+      to = currentTime;
+    } else {
+      from = currentTime - from;
+      to = currentTime;
+    }
+
+    var filterData = [];
+    var finalData = initialData ? initialData : this.get('freshChartData');
+    finalData.forEach(function(series) {
+      filterData.push(jQuery.extend(true, {}, series));
+    });
+    filterData.forEach(function(series) {
+      series.data = series.data.filter(function(data) {
+        return data[0] >= from && data[0] <= to;
+      });
+    });
+
+    filterData = filterData.filter(function(series) {
+      if(series.avgBPM >= average) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    return filterData;
+  },
 
   actions: {
     redToggle() {
       this.set('activeToggle', 'red');
-      this.set('freshChartData', this.get('typeMap')['red']);
+      this.set('freshChartData', this.getFilteredDataOnBpmAndTime(this.get('typeMap')['red']));
     },
 
     yellowToggle() {
       this.set('activeToggle', 'yellow');
-      this.set('freshChartData', this.get('typeMap')['yellow']);
+      this.set('freshChartData', this.getFilteredDataOnBpmAndTime(this.get('typeMap')['yellow']));
     },
 
     greenToggle() {
       this.set('activeToggle', 'green');
-      this.set('freshChartData', this.get('typeMap')['green']);
+      this.set('freshChartData', this.getFilteredDataOnBpmAndTime(this.get('typeMap')['green']));
+    },
+
+    updateChartBasedOnHeartRateAndBPM() {
+      var filterData = this.getFilteredDataOnBpmAndTime(null);
+      this.set('refreshDataUponSelection', filterData);
+    },
+
+    showAll() {
+      this.get('freshChartData').forEach(function(series) {
+        Ember.set(series, 'checked', true);
+      });
+      var filteredData = this.getFilteredDataOnBpmAndTime(this.get('freshChartData'))
+      this.set('refreshDataUponSelection', filteredData);
+    },
+
+    showSerious(number) {
+      this.get('freshChartData').forEach(function(series) {
+        Ember.set(series, 'checked', true);
+      });
+      var filteredData = this.getFilteredDataOnBpmAndTime(this.get('freshChartData'))
+
+      filteredData = filteredData.sort(function(a, b) {
+        var averageA = a.avgBPM,
+            averageB = b.avgBPM;
+        return (averageA < averageB ? 1 : averageA > averageB ? -1 : 0);
+      });
+
+      filteredData = filteredData.slice(0, number);
+      this.set('refreshDataUponSelection', filteredData);
     }
-  }
+
+  },
 
 });

@@ -57,7 +57,7 @@
 
           <div>
             <img src="icons/greater-than.png" width="20px" height="20px" class="greater-icon">
-            <input type="number" id="heart-rate-input" style="text-align:center;" class="main-chart-spinners spinner-text" value="0" max="200">
+            {{input type="number" value=selectedHeartRate action="updateChartBasedOnHeartRateAndBPM" on="enter" class="main-chart-spinners spinner-text"}}
           </div>
 
           <div>
@@ -68,15 +68,17 @@
 
           <div>
             <img src="icons/less-than.png" width="20px" height="20px" class="greater-icon">
-            <input type="number" id="duration-input" style="text-align:center" class="main-chart-spinners spinner-text" value="5">
+            {{input type="number" value=selectedTimeRange action="updateChartBasedOnHeartRateAndBPM" on="enter" class="main-chart-spinners spinner-text"}}
           </div>
 
           <div>
-            <input type="button" id="show-all" class="show-all" value="Show All">
+            <button class="show-all" {{action 'showAll'}}>
+              Show All
+            </button>
           </div>
 
           <div>
-            <a id="show-serious-5">
+            <a id="show-serious-5" {{action "showSerious" 5}}>
               <span class="show-count-selection">
                 Serious 5
               </span>
@@ -84,7 +86,7 @@
           </div>
 
           <div>
-            <a id="show-serious-10">
+            <a id="show-serious-10" {{action 'showSerious' 10}}>
               <span class="show-count-selection">
                 Serious 10
               </span>
