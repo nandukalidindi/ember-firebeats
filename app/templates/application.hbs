@@ -100,7 +100,7 @@
         </div>
 
         <div id="main-chart">
-          {{main-chart content=chartData chartOptions=chartOptions colorUpdate=colorUpdate}}
+          {{main-chart content=refreshDataUponSelection chartOptions=chartOptions colorUpdate=colorUpdate}}
         </div>
 
         <div id="list-item-group">
@@ -123,13 +123,13 @@
       </div>
 
        <div class="btn-group" style="width: 100%; padding: 10px;" role="group" aria-label="...">
-         <button id="red-heart" type="button" class="btn btn-default" style="width: 33.3%; height: 60px; background: white;" autofocus="true">
+         <button id="red-heart" type="button" class="btn btn-default" style="width: 33.3%; height: 60px; background: white;" autofocus="true" {{action 'redToggle'}}>
            <img src="icons/red-heart.png" width="32" height="32" style="margin-bottom:5px"/> <span class="button-count-text"> 0 </span>
          </button>
-         <button id="yellow-heart" type="button" class="btn btn-default" style="width: 33.3%; height: 60px; background: white;">
+         <button id="yellow-heart" type="button" class="btn btn-default" style="width: 33.3%; height: 60px; background: white;" {{action 'yellowToggle'}}>
           <img src="icons/yellow-heart.png" width="32" height="32" style="margin-bottom:5px"/><span class="button-count-text"> 0 </span>
          </button>
-         <button id="green-heart" type="button" class="btn btn-default" style="width: 33.3%; height: 60px; background: white;">
+         <button id="green-heart" type="button" class="btn btn-default" style="width: 33.3%; height: 60px; background: white;" {{action 'greenToggle'}}>
           <img src="icons/green-heart.png" width="32" height="32" style="margin-bottom:5px"/> <span class="button-count-text"> 0 </span>
          </button>
        </div>
@@ -151,7 +151,7 @@
        <div id="left-panel" style="overflow-y:scroll;height:auto;">
          <div>
            {{#if colorUpdate}}
-              {{user-chart-list chartData=chartData}}
+              {{user-chart-list chartData=freshChartData}}
            {{/if}}
          </div>
        </div>

@@ -1,6 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  redRange: [115, 300],
+  yellowRange: [110, 115],
+  greenRange: [0, 110],
+
   chartData: [
     {
       name: 'Prabodh',
@@ -358,13 +362,49 @@ export default Ember.Controller.extend({
 
   colorUpdate: false,
 
+  activeToggle: 'red',
+
+  freshChartData: Ember.computed('chartData', function() {
+    return this.get('chartData');
+  }),
+
+  colorUpdateFetched: Ember.observer('colorUpdate', function() {
+    if(this.get('colorUpdate')) {
+      this.set('freshChartData', this.get('typeMap')['red']);
+    }
+  }),
+
   init() {
     this._super(...arguments);
     (this.get('chartData') || []).forEach(function(series) {
       series.avgBPM = this.calculateAverage(series.data);
       series.checked = true;
     }.bind(this));
+
+
+    var typeMap = {red: [], yellow: [], green: []};
+    this.get('chartData').forEach(function(series) {
+      var average = series.avgBPM;
+      if(average > this.get('redRange')[0] && average < this.get('redRange')[1]) {
+        typeMap.red.push(series);
+      } else if (average > this.get('yellowRange')[0] && average <= this.get('yellowRange')[1]) {
+        typeMap.yellow.push(series);
+      } else if (average > this.get('greenRange')[0] && average <= this.get('greenRange')[1]) {
+        typeMap.green.push(series);
+      }
+    }.bind(this));
+
+    this.set('typeMap', typeMap);
   },
+
+  refreshDataUponSelection: Ember.computed('freshChartData', function() {
+    return this.get('freshChartData');
+  }),
+
+  selectionObserve: Ember.observer('freshChartData.@each.checked', function() {
+    var filteredData = this.get('freshChartData').filterBy('checked');
+    this.set('refreshDataUponSelection', filteredData);
+  }),
 
   calculateAverage(data) {
     var sum = 0, count=1;
@@ -373,6 +413,20 @@ export default Ember.Controller.extend({
       count += 1;
     });
     return Math.round(sum/count);
+  },
+
+  actions: {
+    redToggle() {
+      this.set('freshChartData', this.get('typeMap')['red']);
+    },
+
+    yellowToggle() {
+      this.set('freshChartData', this.get('typeMap')['yellow']);
+    },
+
+    greenToggle() {
+      this.set('freshChartData', this.get('typeMap')['green']);
+    }
   }
 
 });
