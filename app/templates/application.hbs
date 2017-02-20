@@ -107,6 +107,11 @@
         </div>
 
         <div id="list-item-group">
+          {{#if colorUpdate}}
+            {{#each refreshDataUponSelection as |userDetail|}}
+              {{user-detail series=userDetail}}
+            {{/each}}
+          {{/if}}
         </div>
 
         <!-- <script src="js/main-chart-options.js"> </script>
@@ -138,17 +143,35 @@
        </div>
 
        <div class="sorting-placeholder">
-         <button type="button" style="width: 50%; height:45px;" id="select-all" class="btn btn-default">
-           Select all
-         </button>
+         {{#if selectAll}}
+           <button type="button" style="width: 50%; height:45px;" id="select-all" class="btn btn-default" {{action 'selectAll'}}>
+             Select all
+           </button>
+         {{else}}
+           <button type="button" style="width: 50%; height:45px;" id="select-all" class="btn btn-default" {{action 'deselectAll'}}>
+             Deselect all
+           </button>
+         {{/if}}
 
-          <button type="button" style="border: none; background: white;" class="btn btn-default" id="sort-alphabet">
-            <img src="icons/sort-alphabet-ascending.png">
-          </button>
+         {{#if sortAlphabet}}
+            <button type="button" style="border: none; background: white;" class="btn btn-default" id="sort-alphabet" {{action 'sortAscendingAlphabet'}}>
+              <img src="icons/sort-alphabet-ascending.png">
+            </button>
+          {{else}}
+            <button type="button" style="border: none; background: white;" class="btn btn-default" id="sort-alphabet" {{action 'sortDescendingAlphabet'}}>
+              <img src="icons/sort-alphabet-descending.png">
+            </button>
+          {{/if}}
 
-          <button type="button" style="border: none; background: white;" class="btn btn-default" id="sort-numeric">
-            <img src="icons/sort-numeric-ascending.png">
-          </button>
+          {{#if sortNumeric}}
+            <button type="button" style="border: none; background: white;" class="btn btn-default" id="sort-numeric" {{action 'sortAscendingNumeric'}}>
+              <img src="icons/sort-numeric-ascending.png">
+            </button>
+          {{else}}
+            <button type="button" style="border: none; background: white;" class="btn btn-default" id="sort-numeric" {{action 'sortDescendingNumeric'}}>
+              <img src="icons/sort-numeric-descending.png">
+            </button>
+          {{/if}}
        </div>
 
        <div id="left-panel" style="overflow-y:scroll;height:auto;">

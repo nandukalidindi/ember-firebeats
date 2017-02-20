@@ -481,6 +481,12 @@ export default Ember.Controller.extend({
     return filterData;
   },
 
+  selectAll: false,
+
+  sortAlphabet: true,
+
+  sortNumeric: true,
+
   actions: {
     redToggle() {
       this.set('activeToggle', 'red');
@@ -524,8 +530,61 @@ export default Ember.Controller.extend({
 
       filteredData = filteredData.slice(0, number);
       this.set('refreshDataUponSelection', filteredData);
-    }
+    },
 
+    selectAll() {
+      this.get('freshChartData').forEach(function(series) {
+        Ember.set(series, 'checked', true);
+      });
+      this.toggleProperty('selectAll');
+    },
+
+    deselectAll() {
+      this.get('freshChartData').forEach(function(series) {
+        Ember.set(series, 'checked', false);
+      });
+      this.toggleProperty('selectAll');
+    },
+
+    sortAscendingAlphabet() {
+      this.get('freshChartData').sort(function(a,b) {
+        var x = a.name.toLowerCase();
+        var y = b.name.toLowerCase();
+        return (x < y ? -1 : x > y ? 1 : 0);
+      });
+      this.notifyPropertyChange('freshChartData');
+      this.toggleProperty('sortAlphabet');
+    },
+
+    sortDescendingAlphabet() {
+      this.get('freshChartData').sort(function(a,b) {
+        var x = a.name.toLowerCase();
+        var y = b.name.toLowerCase();
+        return (x < y ? 1 : x > y ? -1 : 0);
+      });
+      this.notifyPropertyChange('freshChartData');
+      this.toggleProperty('sortAlphabet');
+    },
+
+    sortAscendingNumeric() {
+      this.get('freshChartData').sort(function(a, b) {
+        var x = a.avgBPM,
+            y = b.avgBPM;
+        return (x < y ? -1 : x > y ? 1 : 0);
+      });
+      this.notifyPropertyChange('freshChartData');
+      this.toggleProperty('sortNumeric');
+    },
+
+    sortDescendingNumeric() {
+      this.get('freshChartData').sort(function(a, b) {
+        var x = a.avgBPM,
+            y = b.avgBPM;
+        return (x < y ? 1 : x > y ? -1 : 0);
+      });
+      this.notifyPropertyChange('freshChartData');
+      this.toggleProperty('sortNumeric');
+    }
   },
 
 });
