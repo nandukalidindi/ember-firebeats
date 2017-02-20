@@ -527,6 +527,7 @@ export default Ember.Controller.extend({
 
     showAll() {
       this.set('selectedHeartRate', 100);
+      this.set('searchText', "");
       this.get('freshChartData').forEach(function(series) {
         Ember.set(series, 'checked', true);
       });
