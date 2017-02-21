@@ -340,7 +340,33 @@ export default Ember.Controller.extend({
       },
       plotOptions: {
         series: {
-          // lineWidth: 2,
+          events: {
+            click: function(event) {
+              var seriesName = this.name;
+              var series = this.chart.series;
+              var options = this.chart.options;
+              var chart = this.chart;
+
+              series.forEach(function(series) {
+                if (series.name !== seriesName) {
+                    series.update({dashStyle: "shortdash", color: "#DEDEDE"});
+                  } else {
+                    series.update({dashStyle: "solid", color: options.series.findBy('name', seriesName).safeColor});
+                }
+              }.bind(this));
+
+              chart.redraw();
+              for (var i = 0; i < series.length; i++) {
+                if (options.series[i].name !== seriesName) {
+                    options.series[i].dashStyle = "shortdash";
+                    options.series[i].color = "#DEDEDE";
+                  } else {
+                    options.series[i].dashStyle = "solid";
+                }
+              }
+
+            }
+          }
         },
         spline: {
           marker: {
@@ -501,22 +527,36 @@ export default Ember.Controller.extend({
     this.set('freshChartData', filteredData);
   }),
 
+  freshDataColorDidUpdate: Ember.observer('freshChartData.@each.color', function() {
+    debugger;
+  }),
+
+  restoreColors() {
+    this.get('chartData').forEach(function(series) {
+      series.color = series.safeColor;
+      series.dashStyle = "solid";
+    });
+  },
+
   actions: {
     redToggle() {
       this.set('activeToggle', 'red');
       this.set('searchText', "");
+      this.restoreColors();
       this.set('freshChartData', this.getFilteredDataOnBpmAndTime(this.get('typeMap')['red']));
     },
 
     yellowToggle() {
       this.set('activeToggle', 'yellow');
       this.set('searchText', "");
+      this.restoreColors();
       this.set('freshChartData', this.getFilteredDataOnBpmAndTime(this.get('typeMap')['yellow']));
     },
 
     greenToggle() {
       this.set('activeToggle', 'green');
       this.set('searchText', "");
+      this.restoreColors();
       this.set('freshChartData', this.getFilteredDataOnBpmAndTime(this.get('typeMap')['green']));
     },
 

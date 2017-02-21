@@ -20,6 +20,7 @@ export default EmberHighChartsComponent.extend({
     if(this.get('chart') && !this.get('content.firstObject.color')) {
       this.get('content').forEach(function(series, index) {
         series.color = this.get('chart.series')[index].color;
+        series.safeColor = this.get('chart.series')[index].color;
       }.bind(this));
       this.set('colorUpdate', true);
     }
