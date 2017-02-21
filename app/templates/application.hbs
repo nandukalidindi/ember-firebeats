@@ -108,7 +108,7 @@
 
         <div id="list-item-group">
           {{#if colorUpdate}}
-            {{#each refreshDataUponSelection as |userDetail|}}
+            {{#each userDetailData as |userDetail|}}
               {{user-detail series=userDetail}}
             {{/each}}
           {{/if}}

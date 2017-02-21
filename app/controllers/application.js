@@ -307,84 +307,105 @@ export default Ember.Controller.extend({
     }
   ],
 
-  chartOptions: {
-      chart: { type: 'spline' },
-      title: { text: '' },
-      subtitle: { text: '' },
-      exporting: { enabled: false },
-      credits: { enabled: false },
-      xAxis: [
-        {
-          title: { text: '' },
-          gridLineWidth: 1,
-          tickInterval: 1
-        },
-        {
-          className: "highcharts-color-1",
-          opposite: true,
-        }
-      ],
-      legend: {
-          enabled: false
-      },
-      yAxis: {
-        title: { text: '' },
-        tickInterval: 60,
-        gridLineWidth: 0,
-        minorTickLength: 0,
-        tickLength: 0
-      },
-      tooltip: {
-        headerFormat: '<b>{series.name}</b><br>',
-        pointFormat: '{point.y} BPM at {point.x}:00'
-      },
-      plotOptions: {
-        series: {
+  triggerOnRedraw(a) {
+    var coloredSelection = a.series.filter(function(series) {
+      return series.color !== "#DEDEDE";
+    });
+
+    this.set('userDetailData', [this.get('freshChartData').findBy('name', coloredSelection[0].name)]);
+  },
+
+  refreshDataDidChange: Ember.observer('refreshDataUponSelection', function() {
+    this.set('userDetailData', this.get('refreshDataUponSelection'));
+  }),
+
+  chartOptions: Ember.computed('chartData', function() {
+    var callback = this.triggerOnRedraw.bind(this);
+    return {
+        chart: { type: 'spline',
           events: {
-            click: function(event) {
-              var seriesName = this.name;
-              var series = this.chart.series;
-              var options = this.chart.options;
-              var chart = this.chart;
-
-              series.forEach(function(series) {
-                if (series.name !== seriesName) {
-                    series.update({dashStyle: "shortdash", color: "#DEDEDE"});
-                  } else {
-                    series.update({dashStyle: "solid", color: options.series.findBy('name', seriesName).safeColor});
-                }
-              }.bind(this));
-
-              chart.redraw();
-              for (var i = 0; i < series.length; i++) {
-                if (options.series[i].name !== seriesName) {
-                    options.series[i].dashStyle = "shortdash";
-                    options.series[i].color = "#DEDEDE";
-                  } else {
-                    options.series[i].dashStyle = "solid";
-                }
+              redraw: function() {
+                // callback(a);
               }
+          }
+        },
+        title: { text: '' },
+        subtitle: { text: '' },
+        exporting: { enabled: false },
+        credits: { enabled: false },
+        xAxis: [
+          {
+            title: { text: '' },
+            gridLineWidth: 1,
+            tickInterval: 1
+          },
+          {
+            className: "highcharts-color-1",
+            opposite: true,
+          }
+        ],
+        legend: {
+            enabled: false
+        },
+        yAxis: {
+          title: { text: '' },
+          tickInterval: 60,
+          gridLineWidth: 0,
+          minorTickLength: 0,
+          tickLength: 0
+        },
+        tooltip: {
+          headerFormat: '<b>{series.name}</b><br>',
+          pointFormat: '{point.y} BPM at {point.x}:00'
+        },
+        plotOptions: {
+          series: {
+            events: {
+              click: function() {
+                var seriesName = this.name;
+                var series = this.chart.series;
+                var options = this.chart.options;
+                var chart = this.chart;
 
+                series.forEach(function(series) {
+                  if (series.name !== seriesName) {
+                      series.update({dashStyle: "shortdash", color: "#DEDEDE"});
+                    } else {
+                      series.update({dashStyle: "solid", color: options.series.findBy('name', seriesName).safeColor});
+                  }
+                }.bind(this));
+
+                for (var i = 0; i < series.length; i++) {
+                  if (options.series[i].name !== seriesName) {
+                      options.series[i].dashStyle = "shortdash";
+                      options.series[i].color = "#DEDEDE";
+                    } else {
+                      options.series[i].dashStyle = "solid";
+                  }
+                }
+                callback(chart);
+                chart.redraw();
+              }
+            }
+          },
+          spline: {
+            marker: {
+                enabled: false
             }
           }
         },
-        spline: {
-          marker: {
-              enabled: false
-          }
+        lang: {
+            noData: "No data to display"
+        },
+        noData: {
+            style: {
+                fontWeight: 'bold',
+                fontSize: '15px',
+                color: '#303030'
+            }
         }
-      },
-      lang: {
-          noData: "No data to display"
-      },
-      noData: {
-          style: {
-              fontWeight: 'bold',
-              fontSize: '15px',
-              color: '#303030'
-          }
-      }
-  },
+    };
+  }),
 
   colorUpdate: false,
 
@@ -525,10 +546,6 @@ export default Ember.Controller.extend({
       }
     });
     this.set('freshChartData', filteredData);
-  }),
-
-  freshDataColorDidUpdate: Ember.observer('freshChartData.@each.color', function() {
-    debugger;
   }),
 
   restoreColors() {
