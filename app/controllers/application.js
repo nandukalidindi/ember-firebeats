@@ -494,8 +494,8 @@ export default Ember.Controller.extend({
 
   getFilteredDataOnBpmAndTime(initialData) {
     var currentTime = 11;
-    var average = this.get('selectedHeartRate') || 0,
-        from = this.get('selectedTimeRange') || 5,
+    var average = parseInt(this.get('selectedHeartRate')) || 0,
+        from = parseInt(this.get('selectedTimeRange')) || 5,
         to = 24;
 
     if(currentTime < from) {
@@ -507,7 +507,7 @@ export default Ember.Controller.extend({
     }
 
     var filterData = [];
-    var finalData = initialData ? initialData : this.get('freshChartData');
+    var finalData = initialData ? initialData : this.get('typeMap')[this.get('activeToggle')];
     finalData.forEach(function(series) {
       filterData.push(jQuery.extend(true, {}, series));
     });
@@ -537,6 +537,7 @@ export default Ember.Controller.extend({
   searchText: "",
 
   searchTextDidChange: Ember.observer('searchText', function() {
+    this.restoreColors();
     var searchText = this.get('searchText');
     var filteredData = this.getFilteredDataOnBpmAndTime(this.get('typeMap')[this.get('activeToggle')]).filter(function(series) {
       if(series.name.toLowerCase().indexOf(searchText.toLowerCase()) !== -1) {
