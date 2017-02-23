@@ -493,7 +493,7 @@ export default Ember.Controller.extend({
   selectedTimeRange: 5,
 
   getFilteredDataOnBpmAndTime(initialData) {
-    var currentTime = 11;
+    var currentTime = (new Date()).getHours();
     var average = parseInt(this.get('selectedHeartRate')) || 0,
         from = parseInt(this.get('selectedTimeRange')) || 5,
         to = 24;
@@ -580,6 +580,7 @@ export default Ember.Controller.extend({
 
     updateChartBasedOnHeartRateAndBPM() {
       var filterData = this.getFilteredDataOnBpmAndTime(null);
+      this.set('freshChartData', filterData);
       this.set('refreshDataUponSelection', filterData);
     },
 
@@ -589,7 +590,8 @@ export default Ember.Controller.extend({
       this.get('freshChartData').forEach(function(series) {
         Ember.set(series, 'checked', true);
       });
-      var filteredData = this.getFilteredDataOnBpmAndTime(this.get('freshChartData'));
+      var filteredData = this.getFilteredDataOnBpmAndTime();
+      this.set('freshChartData', filteredData);
       this.set('refreshDataUponSelection', filteredData);
     },
 
