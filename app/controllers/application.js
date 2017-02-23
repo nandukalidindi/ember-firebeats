@@ -606,7 +606,10 @@ export default Ember.Controller.extend({
             averageB = b.avgBPM;
         return (averageA < averageB ? 1 : averageA > averageB ? -1 : 0);
       });
-
+      filteredData.slice(number, filteredData.length).forEach(function(series) {
+        series.checked = false;
+      });
+      this.set('freshChartData', filteredData);
       filteredData = filteredData.slice(0, number);
       this.set('refreshDataUponSelection', filteredData);
     },
