@@ -556,6 +556,18 @@ export default Ember.Controller.extend({
     });
   },
 
+  isRedActive: Ember.computed('activeToggle', function() {
+    return this.get('activeToggle') === 'red';
+  }),
+
+  isYellowActive: Ember.computed('activeToggle', function() {
+    return this.get('activeToggle') === 'yellow';
+  }),
+
+  isGreenActive: Ember.computed('activeToggle', function() {
+    return this.get('activeToggle') === 'green';
+  }),
+
   actions: {
     redToggle() {
       this.set('activeToggle', 'red');
@@ -590,6 +602,7 @@ export default Ember.Controller.extend({
       this.get('freshChartData').forEach(function(series) {
         Ember.set(series, 'checked', true);
       });
+      this.restoreColors();
       var filteredData = this.getFilteredDataOnBpmAndTime();
       this.set('freshChartData', filteredData);
       this.set('refreshDataUponSelection', filteredData);
@@ -609,6 +622,8 @@ export default Ember.Controller.extend({
       filteredData.slice(number, filteredData.length).forEach(function(series) {
         series.checked = false;
       });
+
+      this.restoreColors();
       this.set('freshChartData', filteredData);
       filteredData = filteredData.slice(0, number);
       this.set('refreshDataUponSelection', filteredData);

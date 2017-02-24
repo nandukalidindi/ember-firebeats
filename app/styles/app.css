@@ -210,6 +210,13 @@
 	color: #2f3841;
 }
 
+.context-button {
+  width: 33.3%;
+  height: 60px;
+  background: white;
+  outline: none !important;
+}
+
 .logo-placeholder {
 	height: 103px;
   position: relative;
